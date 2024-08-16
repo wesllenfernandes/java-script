@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+  <meta charset="UTF-8" />
+  <title>eventos DOM</title>
+  <style>
+    body {
+      background: rgb(137, 137, 206);
+  
+    }
+    section{
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 3px 3px 10px black;
+
+        }
+    footer{
+          text-align: center;
+          color: white;
+          font-size: italic;
+
+        }
+    header {
+     color: white;
+      text-align: center;
+    }
+    div {
+      text-align: center;
+      padding: 8px;
+      
+    }
+  </style>
+
+  </head>
+  <body>
+    <header>
+   <h1> Verificador de idade</h1>
+  </header>
+  <section>
+   <p>Ano de nascimento
+   <input type="number" name="txt" id="1" ></p>
+   <p>Sexo:
+
+<input type="radio" id="masculino" name="Sexo" value="masculino" checked>
+<label for="masculino">masculino</label>
+<input type="radio" id="feminino" name="Sexo" value="feminino">
+<label for="feminino">feminino</label>
+</p>
+<P>
+<input type="button" value="verificar" onclick="verificar()">
+</P>
+<div id="res">preencha o campo</div>
+   <script>
+  
+    function verificar(){
+      var data = new Date()
+      var ano = data.getFullYear()
+      var fano = document.getElementById('1')
+      var res = document.getElementById('res')
+      
+      if (fano.value.length === 0 || Number(fano.value) > ano)  {
+        window.alert('ERRO')
+      }
+      else {
+        var sex = document.getElementsByName('Sexo')
+        var idade = ano - Number(fano.value)
+        var genero =''
+        var img = document.createElement('img') //adicionar e cria um imagem pra ser adicionada
+        img.setAttribute('id', 'foto') //coloca id nas imagemns
+        img.setAttribute("width", "300");  // Defina a largura desejada
+        img.setAttribute("height", "300"); // Defina a altura desejada
+        
+        if (sex[0].checked){
+        genero = 'homem'
+          if (idade >= 1 && idade < 10 ){
+          img.setAttribute('src', 'hc.png')
+        } 
+          else if (idade < 21){
+          img.setAttribute('src', 'hj.jpg')
+        }
+        else if (idade < 50){
+          img.setAttribute('src', 'ha.jpg')
+        }
+        else {
+            img.setAttribute('src', 'hi.jpg')
+        }
+      }
+        else if (sex[1].checked){
+          genero = 'mulher'
+          if (idade >= 1 && idade < 10 ){
+            img.setAttribute('src', 'mc.jpg')
+          } 
+            else if (idade < 21){
+            img.setAttribute('src', 'mj.jpg')
+          }
+          else if (idade < 50){
+            img.setAttribute('src', 'ma.jpg')
+          }
+          else {
+              img.setAttribute('src', 'mi.jpg')
+          }
+
+        }
+        res.style.textAlign = 'center'
+        res.innerHTML = `Detectamos ${genero} com ${idade} anos de idade`
+        res.appendChild(img)
+      }
+    }
+
+   </script>
+
+
+  </section>
+  </body>
+  <footer>
+    <p>&copy; wesllen fernandes paiva</p>
+  </footer>
+</html>
